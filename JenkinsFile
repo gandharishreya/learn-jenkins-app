@@ -1,40 +1,9 @@
 pipeline {
     agent any
-     tools {
-        git 'Default'
-    }
-    stages {
-        stage('Build') {
-            agent{
-                docker{
-                    image 'node:18-alpine'
-                    reuseNode true
-                }
-            }
-            steps {
-                sh '''
-                ls -la
-                node --version
-                npm --version
-                npm ci
-                npm run build
-                ls -la
-                '''
-            }
+     stages{
+        stage('Hello'){
+            sh 'echo "Hello world"'
         }
-         stage('Test'){
-            agent{
-                docker{
-                    image 'node:18-alpine'
-                    reuseNode true
-                }
-            }
-            steps{
-                sh '''
-                #test -f build/index.html
-                npm test
-                '''
-            }
-        }
-    }    
+     }
+     
 }
